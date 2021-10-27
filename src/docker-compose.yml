@@ -2,9 +2,9 @@ version: "3.9"
 
 services:
   php-apache:
-    image: php:8.0.11-apache
+    image: php:8.0.12-apache
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ../src:/var/www/html
+      - ./:/var/www/html
