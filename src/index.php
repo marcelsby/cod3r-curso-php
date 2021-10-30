@@ -13,6 +13,23 @@
     <main class="principal">
         <div class="conteudo">
             <nav class="modulos">
+                <div class="modulo vermelho-escuro">
+                    <h3>7. Funções</h3>
+                    <ul>
+                        <li><a href="exercicio.php?dir=funcoes&file=escopo">Função & Escopo</a></li>
+                        <li><a href="exercicio.php?dir=funcoes&file=args_retorno">Argumentos & Retorno</a></li>
+                        <li><a href="exercicio.php?dir=funcoes&file=palindromo">Desafio Palíndromo</a></li>
+                        <li><a href="exercicio.php?dir=funcoes&file=args_variaveis">Argumentos Variáveis</a></li>
+                        <li><a href="exercicio.php?dir=funcoes&file=args_padroes">Argumentos Padrões</a></li>
+                        <li><a href="exercicio.php?dir=funcoes&file=usando_tipos">Usando Tipos</a></li>
+                        <li><a href="exercicio.php?dir=funcoes&file=anonimas">Anônimas</a></li>
+                        <li><a href="exercicio.php?dir=funcoes&file=closure_callable">Closure & Callable</a></li>
+                        <li><a href="exercicio.php?dir=funcoes&file=recursividade">Recursividade</a></li>
+                        <li><a href="exercicio.php?dir=funcoes&file=desafio_recursividade">Desafio Recursividade</a></li>
+                        <li><a href="exercicio.php?dir=funcoes&file=retornando_funcao">Retornando Função</a></li>
+                        <li><a href="exercicio.php?dir=funcoes&file=map_filter">Map & Filter</a></li>
+                    </ul>
+                </div>
                 <div class="modulo verde-escuro">
                     <h3>6. Repetições</h3>
                     <ul>
