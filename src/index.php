@@ -13,6 +13,17 @@
     <main class="principal">
         <div class="conteudo">
             <nav class="modulos">
+                <div class="modulo roxo-escuro">
+                    <h3>9. Includes</h3>
+                    <ul>
+                        <li><a href="exercicio.php?dir=includes&file=include">Primeiro Include</a></li>
+                        <li><a href="exercicio.php?dir=includes&file=include_funcao">Include Função</a></li>
+                        <li><a href="exercicio.php?dir=includes&file=include_vs_require">Include vs Require</a></li>
+                        <li><a href="exercicio.php?dir=includes&file=require_return">Require & Return</a></li>
+                        <li><a href="exercicio.php?dir=includes&file=include_once">Include Once</a></li>
+                        <li><a href="exercicio.php?dir=includes/desafio_heranca_include&file=UsuarioController">Desafio Herança Include</a></li>
+                    </ul>
+                </div>
                 <div class="modulo azul-escuro">
                     <h3>8. Orientação a Objetos</h3>
                     <ul>
