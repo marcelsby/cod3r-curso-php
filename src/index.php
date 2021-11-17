@@ -13,6 +13,15 @@
     <main class="principal">
         <div class="conteudo">
             <nav class="modulos">
+                <div class="modulo laranja-escuro">
+                    <h3>10. Namespace</h3>
+                    <ul>
+                        <li><a href="exercicio.php?dir=namespace&file=basico">Exemplo Básico</a></li>
+                        <li><a href="exercicio.php?dir=namespace&file=sub">Sub-Namespaces</a></li>
+                        <li><a href="exercicio.php?dir=namespace&file=use_as">Use/As</a></li>
+                        <li><a href="exercicio.php?dir=namespace/desafio_heranca_namespace/app/view/&file=userRegister">Desafio Herança Namespace</a></li>
+                    </ul>
+                </div>
                 <div class="modulo roxo-escuro">
                     <h3>9. Includes</h3>
                     <ul>
