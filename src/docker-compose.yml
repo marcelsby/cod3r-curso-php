@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   php-apache:
-    image: php:8.0.12-apache
+    build: ../docker/php
     ports:
       - "80:80"
       - "443:443"
