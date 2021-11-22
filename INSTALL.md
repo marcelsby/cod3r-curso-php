@@ -18,17 +18,13 @@
     $ sudo groupadd -g 33 www-data
     ```
 
-    2.2. Adicione seu usuário a este grupo:
+    2.2. Na pasta raiz do repositório troque as permissões e titularidade da pasta `src` com o seguinte comando:
 
     ```
-    $ sudo usermod -aG 33 $USER
+    $ sudo chown 33:33 src && sudo chmod 777 src
     ```
 
-    2.3. Na pasta raiz do repositório troque as permissões e titularidade da pasta `src` com o seguinte comando:
-
-    ```
-    $ sudo chown 33:33 src && sudo chmod 775 src
-    ```
+    > **OBS: Utilizar 777 em produção não é recomendável, neste caso foi utilizado para facilitar a configuração, devido à natureza do repositório.**
 
     2.4. Reinicie seu dispositivo
 
