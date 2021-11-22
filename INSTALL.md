@@ -36,8 +36,6 @@
 
 3. Acesse o endereço do servidor por um browser e logue com algum usuário que esteja cadastrado no arquivo `src/login.php`
 
-___
-
 # Utilizando um servidor Apache (nativo, MAMP, LAMP, etc...)
 
 ## Pré-requisitos
