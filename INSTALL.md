@@ -32,7 +32,7 @@
 
     2.4. Reinicie seu dispositivo
 
-2. Execute o comando `docker-compose up -d` utilizando o arquivo `src/docker-compose.yml` como argumento
+2. Pelo terminal, acesse a pasta `src` e execute o comando `docker-compose up -d`
 
 3. Acesse o endereço do servidor por um browser e logue com algum usuário que esteja cadastrado no arquivo `src/login.php`
 
