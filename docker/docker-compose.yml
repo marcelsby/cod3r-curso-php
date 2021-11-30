@@ -11,10 +11,7 @@ services:
   mariadb:
     image: mariadb:latest
     environment:
-      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASS}
-      MARIADB_DATABASE: cod3r_php
-      MARIADB_USER: ${DB_USER}
-      MARIADB_PASSWORD: ${DB_PASS}
+      MARIADB_ROOT_PASSWORD: admin
     ports:
       - "3306:3306"
     volumes:
