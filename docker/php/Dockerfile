@@ -4,6 +4,8 @@ RUN apt update
 
 RUN apt install -y locales 
 
+RUN docker-php-ext-install mysqli pdo_mysql
+
 RUN sed -i '/pt_BR.UTF-8/s/^# //g' /etc/locale.gen && \
     locale-gen
 

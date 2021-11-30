@@ -1,0 +1,31 @@
+services:
+  php-apache:
+    build: ./php
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../src/:/var/www/html
+    networks:
+      - cod3r-php
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MARIADB_DATABASE: ${DB_DATABASE}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASS}
+    ports:
+      - "3306:3306"
+    volumes:
+      - cod3r_php_mariadb_data:/var/lib/mysql
+    networks:
+      - cod3r-php
+
+volumes:
+  cod3r_php_mariadb_data:
+
+networks:
+  cod3r-php:
+    driver: bridge
+
