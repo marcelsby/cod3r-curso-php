@@ -12,7 +12,7 @@ services:
     image: mariadb:latest
     environment:
       MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASS}
-      MARIADB_DATABASE: ${DB_DATABASE}
+      MARIADB_DATABASE: cod3r_php
       MARIADB_USER: ${DB_USER}
       MARIADB_PASSWORD: ${DB_PASS}
     ports:
