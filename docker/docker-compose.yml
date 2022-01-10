@@ -2,10 +2,11 @@ services:
   php-apache:
     build: ./php
     ports:
-      - "80:80"
+      - "8080:80"
       - "443:443"
     volumes:
-      - ../src/:/var/www/html
+      - ../public:/var/www/html
+      - ../src:/var/www/src
     networks:
       - cod3r-php
   mariadb:
@@ -15,12 +16,12 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - cod3r_php_mariadb_data:/var/lib/mysql
+      - cod3r-innout-projeto-final:/var/lib/mysql
     networks:
       - cod3r-php
 
 volumes:
-  cod3r_php_mariadb_data:
+  cod3r-innout-projeto-final:
 
 networks:
   cod3r-php:
