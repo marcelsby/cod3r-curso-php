@@ -1,4 +1,6 @@
-USE INNOUT;
+CREATE SCHEMA IF NOT EXISTS innout;
+
+USE innout;
 
 DROP TABLE IF EXISTS working_hours, users;
 CREATE TABLE users (
