@@ -10,27 +10,23 @@
 
 ## Passos
 
-1. Devido a alguns [problemas de permissão](https://github.com/docker/compose/issues/5507#issuecomment-353890002) do Docker, os comandos abaixo são necessários:
+1. Devido a alguns [problemas de permissão](https://github.com/docker/compose/issues/5507#issuecomment-353890002) do Docker, o comando abaixo é necessário:
 
-    1.1. Crie um grupo com o ID 33:
-
-    ```
-    $ sudo groupadd -g 33 www-data
-    ```
-
-    1.2. Na pasta raiz do repositório troque as permissões e titularidade da pasta `src` com o seguinte comando:
+    Altere as permissões das pastas `public` e `src`:
 
     ```
-    $ sudo chown 33:33 src && sudo chmod 777 src
+    $ sudo chmod 777 public src
     ```
 
-    > **OBS: Utilizar 777 em produção não é recomendável, neste caso foi utilizado para facilitar a configuração, devido à natureza do repositório.**
+    > **OBS: Utilizar 777 em produção não é recomendável, neste caso foi utilizado para facilitar a configuração, devido à natureza didática do repositório.**
 
-    1.3. Reinicie seu dispositivo
+2. Copie o arquivo `src/env.sample.ini` para a mesma pasta e o renomeie para `env.ini`, após isso preencha-o com as informações de conexão com o banco de dados
 
-2. Pelo terminal, acesse a pasta `src` e execute o comando `docker-compose up -d`
+3. Pelo terminal, acesse a pasta `docker` e execute o comando `docker-compose up -d`
 
-3. Acesse o endereço do servidor por um browser e logue com algum usuário que esteja cadastrado no arquivo `src/login.php`
+4. Acesse o banco de dados e execute o dump contido no arquivo `extras/db.sql` para que o banco seja populado com usuários e outros dados necessários
+
+5. Acesse o endereço do servidor (geralmente `http://127.0.0.1:8080` ou `http://localhost:8080`) por um browser e logue com algum usuário que conste no arquivo `extras/db.sql`
 
 # Utilizando um servidor Apache (nativo, MAMP, LAMP, etc...)
 
@@ -38,8 +34,15 @@
 
 - Servidor Apache >= 2.4.51
 - Extensão do PHP (>= 8.0.12) para o servidor Apache
+- Extensão `mod_rewrite` do Apache ativada
+- MariaDB >= 10.6.5
 
 ## Passos
 
-1. Sirva a pasta `src`
-2. Acesse o endereço do servidor por um browser e logue com algum usuário que esteja cadastrado no arquivo `src/login.php`
+1. Copie o arquivo `src/env.sample.ini` para a mesma pasta e o renomeie para `env.ini`, após isso preencha-o com as informações de conexão com o banco de dados
+
+2. Sirva a pasta `public`
+
+3. Acesse o banco de dados e execute o dump contido no arquivo `extras/db.sql` para que o banco seja populado com usuários e outros dados necessários
+
+4. Acesse o endereço do servidor (geralmente `http://127.0.0.1:8080` ou `http://localhost:8080`) por um browser e logue com algum usuário que conste no arquivo `extras/db.sql`
