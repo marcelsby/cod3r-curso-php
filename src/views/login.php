@@ -25,12 +25,15 @@
                     <label for="email">E-mail</label>
                     <input type="email" name="email" id="email"
                         class="form-control" 
-                        placeholder="Informe o e-mail" autofocus>
+                        placeholder="Informe o e-mail"
+                        value="<?php echo isset($email) ? $email : '' ?>"
+                        autofocus>
+                    </input>
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>
                     <input type="password" name="password" id="password"
-                        class="form-control" 
+                        class="form-control" isset($email) ?
                         placeholder="Informe a senha">
                 </div>
             </div>
@@ -38,6 +41,6 @@
                     <button class="btn btn-lg btn-primary">Entrar</button>
             </div>
         </div>
-    </form>    
+    </form>
 </body>
 </html>
