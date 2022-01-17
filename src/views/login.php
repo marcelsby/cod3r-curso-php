@@ -21,21 +21,28 @@
                 <em class="icofont-runner-alt-1 ml-2"></em>
             </div>
             <div class="card-body">
+                <?php include(TEMPLATE_PATH . '/messages.php') ?>
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="email" name="email" id="email"
-                        class="form-control" 
+                        class="form-control <?php echo array_key_exists('email', $errors) ? 'is-invalid' : '' ?>"
                         placeholder="Informe o e-mail"
                         value="<?php echo isset($email) ? $email : '' ?>"
                         autofocus>
-                    </input>
+                    <div class="invalid-feedback">
+                        <?php echo array_key_exists('email', $errors) ? $errors['email'] : '' ?>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>
                     <input type="password" name="password" id="password"
-                        class="form-control" isset($email) ?
+                        class="form-control <?php echo array_key_exists('password', $errors) ? 'is-invalid' : '' ?>"
                         placeholder="Informe a senha">
+                    <div class="invalid-feedback">
+                        <?php echo array_key_exists('password', $errors) ? $errors['password'] : '' ?>
+                    </div>
                 </div>
+                
             </div>
             <div class="card-footer">
                     <button class="btn btn-lg btn-primary">Entrar</button>
