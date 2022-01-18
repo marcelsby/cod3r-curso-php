@@ -24,3 +24,18 @@ function loadView($viewName, $params = [])
 
     require_once(VIEW_PATH . "/{$viewName}.php");
 }
+
+function loadTemplateView($viewName, $params = [])
+{
+    loadUtil('variableValidation');
+
+    if (!empty($params)) {
+        foreach ($params as $key => $value) {
+            if (strlen($key) > 0 && isValidVariableIdentifier($key)) {
+                ${$key} = $value;
+            }
+        }
+    }
+
+    require_once(VIEW_PATH . "/{$viewName}.php");
+}
