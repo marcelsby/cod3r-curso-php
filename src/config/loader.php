@@ -29,7 +29,7 @@ function loadTemplatedView($viewName, $params = [])
     require_once(TEMPLATE_PATH . "/footer.php");
 }
 
-function loadTitle($params = [])
+function renderTitle($title, $subtitle, $icon = null)
 {
-    require_once(CREATE_VARIABLE_FROM_PARAMS_FILE);
+    require_once(TEMPLATE_PATH . '/title.php');
 }
