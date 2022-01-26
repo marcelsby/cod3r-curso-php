@@ -2,4 +2,4 @@
 
 session_start();
 requireValidSession();
-loadTemplateView('day_records');
+loadTemplatedView('day_records');
