@@ -97,7 +97,7 @@ class Model
 
     public function save()
     {
-        $sql = "INSERT INTO" . static::$tableName . " ("
+        $sql = "INSERT INTO " . static::$tableName . " ("
             . implode(',', static::$columns) . ") VALUES (";
 
         foreach (static::$columns as $col) {

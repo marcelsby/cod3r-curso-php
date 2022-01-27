@@ -1,5 +1,10 @@
 <?php
 
+loadModel('WorkingHours');
+
+Database::executeSQL('DELETE FROM working_hours');
+Database::executeSQL('DELETE FROM users WHERE id > 5');
+
 /**
  * Return a workday template from the rates inputed as arguments.
  *
@@ -26,7 +31,7 @@ function getWorkdayTemplateByOdds($regularRate, $extraRate, $lazyRate)
         'time2' => '12:00:00',
         'time3' => '13:00:00',
         'time4' => '17:00:00',
-        'worked_hours' => DAILY_TIME
+        'worked_time' => DAILY_TIME
     ];
 
     // 9 Hours
@@ -35,7 +40,7 @@ function getWorkdayTemplateByOdds($regularRate, $extraRate, $lazyRate)
         'time2' => '12:00:00',
         'time3' => '13:00:00',
         'time4' => '18:00:00',
-        'worked_hours' => DAILY_TIME + ONE_HOUR_SECONDS
+        'worked_time' => DAILY_TIME + ONE_HOUR_SECONDS
     ];
 
     // 7:30 hours
@@ -44,18 +49,54 @@ function getWorkdayTemplateByOdds($regularRate, $extraRate, $lazyRate)
         'time2' => '12:00:00',
         'time3' => '13:00:00',
         'time4' => '17:00:00',
-        'worked_hours' => DAILY_TIME - HALF_HOUR_SECONDS
+        'worked_time' => DAILY_TIME - HALF_HOUR_SECONDS
     ];
 
     $value = rand(0, 100);
 
+    $result = [];
+
     if ($value <= $regularRate) {
-        return $regularWorkdayTemplate;
+        $result = $regularWorkdayTemplate;
     } elseif ($value <= $regularRate + $extraRate) {
-        return $extraHourWorkdayTemplate;
+        $result = $extraHourWorkdayTemplate;
     } else {
-        return $lazyWorkdayTemplate;
+        $result = $lazyWorkdayTemplate;
+    }
+
+    return $result;
+}
+
+function populateWorkingHours($userId, $initialDate, $regularRate, $extraRate, $lazyRate)
+{
+    $currentDate = $initialDate;
+    $today = new DateTime();
+    $columns = ['user_id' => $userId, 'work_date' => $currentDate];
+
+    while (isPast($currentDate, $today)) {
+        if (!isWeekend($currentDate)) {
+            $template = getWorkdayTemplateByOdds($regularRate, $extraRate, $lazyRate);
+
+            $columns = array_merge($columns, $template);
+
+            $workingHours = new WorkingHours($columns);
+            $workingHours->save($columns);
+        }
+
+        $currentDate = getNextDay($currentDate)->format('Y-m-d');
+        $columns['work_date'] = $currentDate;
     }
 }
 
-print_r(getWorkdayTemplateByOdds(33, 33, 34));
+$lastMonth = strtotime('first day of last month');
+
+// Jornada de trabalho do Admin
+populateWorkingHours(1, date('Y-m-d', $lastMonth), 70, 20, 10);
+
+// Jornada de trabalho do Seu Barriga
+populateWorkingHours(3, date('Y-m-d', $lastMonth), 20, 75, 5);
+
+// Jornada de trabalho do Seu Madruga
+populateWorkingHours(4, date('Y-m-d', $lastMonth), 20, 10, 70);
+
+echo 'Tudo certo!';
