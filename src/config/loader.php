@@ -1,6 +1,6 @@
 <?php
 
-const CREATE_VARIABLE_FROM_PARAMS_FILE = UTILS_PATH . '/createVariableFromParams.php';
+const CREATE_VARIABLE_FROM_PARAMS_FILE = UTILS_PATH . '/create_variable_from_params.php';
 
 function loadModel($modelName)
 {
