@@ -28,4 +28,31 @@ class WorkingHours extends Model
 
         return $registry;
     }
+
+    public function getNextTimeAttribute()
+    {
+        $timesAttributes = array_slice(static::$columns, 3, 4);
+
+        foreach ($timesAttributes as $time) {
+            if ($this->$time === null) {
+                return $time;
+            }
+        }
+
+        return null;
+    }
+
+    // Bater o ponto
+    public function clockIn($time)
+    {
+        $timeColumn = $this->getNextTimeAttribute();
+
+        if (!isset($timeColumn)) {
+            throw new AppException('Você já fez os 4 batimentos do dia!');
+        }
+
+        $this->$timeColumn = $time;
+
+        $this->id === null ? $this->insert() : $this->update();
+    }
 }

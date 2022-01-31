@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <a href="???" class="btn btn-success btn-lg">
+            <a href="clock_in.php" class="btn btn-success btn-lg">
                 <i class="icofont-check mr-1"></i>
                 Bater o Ponto
             </a>
