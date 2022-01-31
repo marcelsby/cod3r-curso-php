@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\registerArgumentsSet;
-
 class WorkingHours extends Model
 {
     protected static $tableName = 'working_hours';
