@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\registerArgumentsSet;
+
 class WorkingHours extends Model
 {
     protected static $tableName = 'working_hours';
@@ -13,4 +15,19 @@ class WorkingHours extends Model
         'time4',
         'worked_time'
     ];
+
+    public static function loadFromUserAndDate($userId, $workDate)
+    {
+        $registry = self::getOne(['user_id' => $userId, 'work_date' => $workDate]);
+
+        if (!isset($registry)) {
+            $registry = new WorkingHours([
+                'user_id' => $userId,
+                'work_date' => $workDate,
+                'worked_time' => 0
+            ]);
+        }
+
+        return $registry;
+    }
 }
