@@ -97,7 +97,7 @@ class Model
 
     public function insert()
     {
-        $sql = "INSERT INTO " . static::$tableName . " ("
+        $sql = 'INSERT INTO ' . static::$tableName . " ("
             . implode(',', static::$columns) . ") VALUES (";
 
         foreach (static::$columns as $col) {
@@ -122,11 +122,13 @@ class Model
         $sql[strlen($sql) - 1] = ' ';
 
         $sql .= "WHERE id = {$this->id}";
+
+        Database::executeSQL($sql);
     }
 
     public function __get($key)
     {
-        return $this->values[$key];
+        return $this->values[$key] ?? null;
     }
 
     public function __set($key, $value)
