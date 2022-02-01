@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-requireValidSession();
+validateSession();
 
 loadModel('WorkingHours');
 
@@ -13,7 +13,7 @@ try {
     $records->clockIn($currentTime);
     addMessage(MessageType::Success, 'Ponto inserido com sucesso!');
 } catch (AppException $e) {
-    addMessage(MessageType::Success, $e->getMessage());
+    addMessage(MessageType::Error, $e->getMessage());
 }
 
 header('Location: day_records.php');

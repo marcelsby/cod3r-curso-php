@@ -1,6 +1,6 @@
 <?php
 
-function requireValidSession()
+function validateSession()
 {
     if (!isset($_SESSION['user'])) {
         header('Location: login.php');
