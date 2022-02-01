@@ -3,6 +3,13 @@
 date_default_timezone_set('America/Sao_Paulo');
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
 
+// Formatadores para data e hora utilizadas ao longo do sistema
+$localDateTimeFmt = new IntlDateFormatter(
+    'pt_BR',
+    IntlDateFormatter::LONG,
+    IntlDateFormatter::NONE,
+);
+
 // Constantes gerais
 define('DAILY_TIME', 60 * 60 * 8);
 define('ONE_HOUR_SECONDS', 60 * 60);
@@ -21,6 +28,7 @@ require_once(realpath(dirname(__FILE__) . '/database.php'));
 require_once(realpath(dirname(__FILE__) . '/loader.php'));
 require_once(realpath(dirname(__FILE__) . '/session.php'));
 require_once(UTILS_PATH . '/date_utils.php');
+require_once(UTILS_PATH . '/message_utils.php');
 require_once(MODEL_PATH . '/Model.php');
 require_once(MODEL_PATH . '/User.php');
 require_once(EXCEPTION_PATH . '/AppException.php');

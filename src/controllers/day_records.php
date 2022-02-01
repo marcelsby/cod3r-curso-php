@@ -6,7 +6,7 @@ requireValidSession();
 loadModel('WorkingHours');
 
 $date = (new DateTime())->getTimestamp();
-$today = strftime('%d de %B de %Y', $date);
+$today = $localDateTimeFmt->format($date);
 
 $user = $_SESSION['user'];
 $records = WorkingHours::loadFromUserAndDate($user->id, date('Y-m-d'));
