@@ -25,4 +25,14 @@
             </a>
         </div>
     </div>
+
+    <form action="clock_in.php" method="post" class="mt-5">
+        <div class="input-group no-border">
+            <input class="form-control" type="text" name="forcedTime"
+                placeholder="Informe a hora para simular o batimento">
+            <button class="btn btn-danger ml-3">
+                Simular Ponto
+            </button>
+        </div>
+    </form>
 </main>
