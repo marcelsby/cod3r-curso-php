@@ -34,6 +34,19 @@ class WorkingHours extends Model
         return $registry;
     }
 
+    public function getActiveClock()
+    {
+        $nextTime = $this->getNextTimeAttribute();
+
+        if ($nextTime === 'time1' || $nextTime === 'time3') {
+            return 'exitTime';
+        } elseif ($nextTime === 'time2' || $nextTime === 'time4') {
+            return 'workedInterval';
+        } else {
+            return null;
+        }
+    }
+
     public function getNextTimeAttribute()
     {
         $timesAttributes = array_slice(static::$columns, 3, 4);
