@@ -3,8 +3,6 @@
 session_start();
 validateSession();
 
-loadModel('WorkingHours');
-
 $date = (new DateTime())->getTimestamp();
 $today = $localDateTimeFmt->format($date);
 
