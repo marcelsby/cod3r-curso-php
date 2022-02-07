@@ -55,3 +55,10 @@ function getDateFromString($str)
 {
     return DateTimeImmutable::createFromFormat('H:i:s', $str);
 }
+
+function getSecondsFromDateInterval($interval)
+{
+    $d1 = new DateTimeImmutable();
+    $d2 = $d1->add($interval);
+    return $d2->getTimestamp() - $d1->getTimestamp();
+}
