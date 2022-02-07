@@ -1,0 +1,43 @@
+<?php
+
+session_start();
+validateSession();
+
+$currentDate = new DateTime();
+
+$user = $_SESSION['user'];
+
+$registries = WorkingHours::getMonthlyReport($user->id, $currentDate);
+
+$report = [];
+$workDayCounter = 0;
+$sumOfWorkedTime = 0;
+$lastDay = getLastDayOfMonth($currentDate)->format('d');
+
+for ($day = 1; $day <= $lastDay; $day++) {
+    $date = $currentDate->format('Y-m') . '-' . sprintf('%02d', $day);
+    $registry = $registries[$date] ?? null;
+
+    if (isPastWorkday($date)) {
+        $workDayCounter++;
+
+        if ($registry) {
+            $sumOfWorkedTime += $registry->worked_time;
+            array_push($report, $registry);
+        } else {
+            array_push($report, new WorkingHours([
+                'work_date' => $date,
+                'worked_time' => 0
+            ]));
+        }
+    }
+}
+
+$expectedWorkedTime = $workDayCounter * DAILY_TIME;
+$balance = getTimeStringFromSeconds($sumOfWorkedTime - $expectedWorkedTime);
+
+loadTemplatedView('monthly_report', [
+    'report' => $report,
+    'sumOfWorkedTime' => getTimeStringFromSeconds($sumOfWorkedTime),
+    'balance' => $balance
+]);

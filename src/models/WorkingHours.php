@@ -138,6 +138,17 @@ class WorkingHours extends Model
         return $exitTime;
     }
 
+    public function getDayBalance()
+    {
+        if ((!isset($this->time1) && !isPastWorkday($this->work_date)) || $this->worked_time == DAILY_TIME) {
+            return '-';
+        }
+
+        $dayBalance = $this->worked_time - DAILY_TIME;
+
+        return getTimeStringFromSeconds($dayBalance);
+    }
+
     public static function getMonthlyReport($userId, $date)
     {
         $registries = [];

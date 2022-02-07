@@ -3,7 +3,7 @@
 session_start();
 validateSession();
 
-$date = (new DateTime())->getTimestamp();
-$today = $localDateTimeFmt->format($date);
+$date = new DateTime();
+$today = formatDateWithMonthSpelled($date);
 
 loadTemplatedView('day_records', ['today' => $today]);

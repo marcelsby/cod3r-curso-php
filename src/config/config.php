@@ -3,13 +3,6 @@
 date_default_timezone_set('America/Sao_Paulo');
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
 
-// Formatadores para data e hora utilizadas ao longo do sistema
-$localDateTimeFmt = new IntlDateFormatter(
-    'pt_BR',
-    IntlDateFormatter::LONG,
-    IntlDateFormatter::NONE,
-);
-
 // Constantes gerais
 define('DAILY_TIME', 60 * 60 * 8);
 define('ONE_HOUR_SECONDS', 60 * 60);

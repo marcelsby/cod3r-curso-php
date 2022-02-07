@@ -62,3 +62,80 @@ function getSecondsFromDateInterval($interval)
     $d2 = $d1->add($interval);
     return $d2->getTimestamp() - $d1->getTimestamp();
 }
+
+function getFirstDayOfMonth($date)
+{
+    $time = getDateAsDateTime($date)->getTimestamp();
+
+    return new DateTime(date('Y-m-1', $time));
+}
+
+function getLastDayOfMonth($date)
+{
+    $time = getDateAsDateTime($date)->getTimestamp();
+
+    return new DateTime(date('Y-m-t', $time));
+}
+
+function isPastWorkday($date)
+{
+    return !isWeekend($date) && isPast($date, new DateTime());
+}
+
+function getTimeStringFromSeconds($seconds)
+{
+    $isNegative = $seconds < 0;
+    $absoluteSeconds = abs($seconds);
+
+    $h = intdiv($absoluteSeconds, 3600);
+    $m = intdiv(($absoluteSeconds % 3600), 60);
+    $s = ($absoluteSeconds % 60);
+
+    $timeString = $isNegative
+        ? '-' . sprintf('%02d:%02d:%02d', $h, $m, $s)
+        : '+' . sprintf('%02d:%02d:%02d', $h, $m, $s) ;
+
+    return $timeString;
+}
+
+function formatShortDateWithLocale(string | DateTime $date)
+{
+    $fmt = new IntlDateFormatter(
+        'pt_BR',
+        IntlDateFormatter::FULL,
+        IntlDateFormatter::NONE,
+        null,
+        null,
+        'dd/MM/yyyy'
+    );
+
+    $date = getDateAsDateTime($date);
+
+    return $fmt->format($date);
+}
+
+function formatDateWithMonthSpelled(string | DateTime $date)
+{
+    $fmt = new IntlDateFormatter(
+        'pt_BR',
+        IntlDateFormatter::LONG,
+        IntlDateFormatter::NONE,
+    );
+
+    $date = getDateAsDateTime($date);
+
+    return $fmt->format($date);
+}
+
+function formatDateWithDayAndMonthSpelled(string | DateTime $date)
+{
+    $fmt = new IntlDateFormatter(
+        'pt_BR',
+        IntlDateFormatter::FULL,
+        IntlDateFormatter::NONE,
+    );
+
+    $date = getDateAsDateTime($date);
+
+    return ucfirst($fmt->format($date));
+}

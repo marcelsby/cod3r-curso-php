@@ -35,7 +35,7 @@ function loadTemplatedView($viewName, $params = [])
     require_once(TEMPLATE_PATH . "/footer.php");
 }
 
-function renderTitle($title, $subtitle, $icon = null)
+function renderTitle(string $title, string $subtitle, string $icon = null)
 {
     require_once(TEMPLATE_PATH . '/title.php');
 }
