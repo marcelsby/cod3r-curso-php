@@ -43,6 +43,15 @@ class Model
         return $result ? new $class($result->fetch_assoc()) : null;
     }
 
+    /**
+     * Performs a query in the database and return the result.
+     * @param array $filters
+     * The filters used to query (e.g. ['id' => 1, 'name' => 'João']).
+     * It accepts raw SQL to perform customized operations, to use it your array key must be
+     * 'raw' (e.g. ['raw' => "work_date BETWEEN {$date1} AND {$date2}"] or ['raw' => "id > {$id}"]).
+     * @param string $columns The columns that you want to return.
+     * @return \mysqli_result | null
+     */
     public static function getResultSetFromSelect($filters = [], $columns = '*')
     {
         $sql = "SELECT ${columns} FROM "
@@ -66,15 +75,25 @@ class Model
         if (!empty($filters)) {
             if (count($filters) == 1) {
                 foreach ($filters as $column => $value) {
-                    $sql .= " WHERE ${column} = " . static::getFormatedValue($value);
+                    if ($column === 'raw') {
+                        $sql .= " WHERE ${value}";
+                    } else {
+                        $sql .= " WHERE ${column} = " . static::getFormatedValue($value);
+                    }
                 }
             } else {
                 $index = 1;
 
                 foreach ($filters as $column => $value) {
-                    $sql .= $index == 1
-                        ? (" WHERE ${column} = " . static::getFormatedValue($value))
-                        : (" AND ${column} = " . static::getFormatedValue($value));
+                    if ($column === 'raw') {
+                        $sql .= $index == 1
+                            ? " WHERE ${value}"
+                            : " AND ${value}";
+                    } else {
+                        $sql .= $index == 1
+                            ? (" WHERE ${column} = " . static::getFormatedValue($value))
+                            : (" AND ${column} = " . static::getFormatedValue($value));
+                    }
 
                     $index++;
                 }
