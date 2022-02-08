@@ -98,6 +98,7 @@ function getTimeStringFromSeconds($seconds)
     return $timeString;
 }
 
+// TODO: refatorar estas (monstruosidades) funções de formatação de data
 function formatShortDateWithLocale(string | DateTime $date)
 {
     $fmt = new IntlDateFormatter(
@@ -133,6 +134,22 @@ function formatDateWithDayAndMonthSpelled(string | DateTime $date)
         'pt_BR',
         IntlDateFormatter::FULL,
         IntlDateFormatter::NONE,
+    );
+
+    $date = getDateAsDateTime($date);
+
+    return ucfirst($fmt->format($date));
+}
+
+function formatDateWithYearAndMonth(string | DateTime $date)
+{
+    $fmt = new IntlDateFormatter(
+        'pt_BR',
+        IntlDateFormatter::FULL,
+        IntlDateFormatter::NONE,
+        null,
+        null,
+        "MMMM 'de' yyyy"
     );
 
     $date = getDateAsDateTime($date);
