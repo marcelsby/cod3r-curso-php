@@ -146,7 +146,50 @@ class WorkingHours extends Model
 
         $dayBalance = $this->worked_time - DAILY_TIME;
 
-        return getTimeStringFromSeconds($dayBalance);
+        return getTimeStringFromSecondsWithSign($dayBalance);
+    }
+
+    public static function getAbsentUsers()
+    {
+        $today = (new DateTime())->format('Y-m-d');
+
+        $result = Database::getResultFromQuery(
+            "SELECT name FROM users 
+            WHERE end_date IS NULL
+            AND id NOT IN (
+                SELECT user_id FROM working_hours
+                WHERE work_date = '{$today}'
+                AND time1 IS NOT NULL
+            )"
+        );
+
+        $absentUsers = [];
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                array_push($absentUsers, $row['name']);
+            }
+        }
+
+        return $absentUsers;
+    }
+
+    /**
+     * Return the time worked by all workers in a specific year and month.
+     * @param string $yearAndMonth The year and month in this format "yyyy-mm" (e.g. "2022-02", "2021-09").
+     * @return int The summation of all worked time in the specified month, in seconds.
+     */
+    public static function getWorkedTimeInMonth($yearAndMonth)
+    {
+        $startDate = getFirstDayOfMonth($yearAndMonth)->format('Y-m-d');
+        $endDate = getLastDayOfMonth($yearAndMonth)->format('Y-m-d');
+
+        $result = static::getResultSetFromSelect(
+            ['raw' => "work_date BETWEEN '{$startDate}' AND '{$endDate}'"],
+            'SUM(worked_time) as sum'
+        );
+
+        return $result->fetch_assoc()['sum'];
     }
 
     public static function getMonthlyReport($userId, $date)
