@@ -82,7 +82,7 @@ function isPastWorkday($date)
     return !isWeekend($date) && isPast($date, new DateTime());
 }
 
-function getTimeStringFromSeconds($seconds)
+function getTimeStringFromSecondsWithSign($seconds)
 {
     $isNegative = $seconds < 0;
     $absoluteSeconds = abs($seconds);
@@ -91,11 +91,18 @@ function getTimeStringFromSeconds($seconds)
     $m = intdiv(($absoluteSeconds % 3600), 60);
     $s = ($absoluteSeconds % 60);
 
-    $timeString = $isNegative
-        ? '-' . sprintf('%02d:%02d:%02d', $h, $m, $s)
-        : '+' . sprintf('%02d:%02d:%02d', $h, $m, $s) ;
+    return $isNegative ? sprintf('-%02d:%02d:%02d', $h, $m, $s) : sprintf('+%02d:%02d:%02d', $h, $m, $s);
+}
 
-    return $timeString;
+function getTimeStringFromSeconds($seconds)
+{
+    $absoluteSeconds = abs($seconds);
+
+    $h = intdiv($absoluteSeconds, 3600);
+    $m = intdiv(($absoluteSeconds % 3600), 60);
+    $s = ($absoluteSeconds % 60);
+
+    return sprintf('%02d:%02d:%02d', $h, $m, $s);
 }
 
 // TODO: refatorar estas (monstruosidades) funções de formatação de data

@@ -52,7 +52,7 @@ for ($day = 1; $day <= $lastDay; $day++) {
 }
 
 $expectedWorkedTime = $workDayCounter * DAILY_TIME;
-$balance = getTimeStringFromSeconds($sumOfWorkedTime - $expectedWorkedTime);
+$balance = getTimeStringFromSecondsWithSign($sumOfWorkedTime - $expectedWorkedTime);
 
 loadTemplatedView('monthly_report', [
     'report' => $report,
