@@ -6,11 +6,11 @@ class Login extends Model
     {
         $errors = [];
 
-        if (strlen(trim($this->email)) == 0) {
+        if (isEmptyString($this->email)) {
             $errors['email'] = 'E-mail é um campo obrigatório.';
         }
 
-        if (strlen(trim($this->password)) == 0) {
+        if (isEmptyString($this->password)) {
             $errors['password'] = 'Senha é um campo obrigatório.';
         }
 
