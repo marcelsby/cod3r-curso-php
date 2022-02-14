@@ -7,7 +7,7 @@ if (isset($_SESSION['message'])) {
     unset($_SESSION['message']);
 } elseif (isset($exception)) {
     $message =  [
-        'type' => 'error',
+        'type' => MessageType::Error->value,
         'message' => $exception->getMessage()
     ];
 
@@ -17,7 +17,7 @@ if (isset($_SESSION['message'])) {
 }
 
 if (isset($message)) {
-    $alertType = $message['type'] === 'error' ? 'danger' : 'success';
+    $alertType = $message['type'];
 }
 
 ?>

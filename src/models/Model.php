@@ -68,6 +68,11 @@ class Model
         }
     }
 
+    public function getValues()
+    {
+        return $this->values;
+    }
+
     public static function getCount($filters = [])
     {
         $result = static::getResultSetFromSelect($filters, 'count(*) as count');
@@ -151,6 +156,13 @@ class Model
         Database::executeSQL($sql);
     }
 
+    public function delete()
+    {
+        $sql = 'DELETE FROM ' . static::$tableName . ' WHERE id = ' . $this->id;
+
+        Database::executeSQL($sql);
+    }
+
     public function __get($key)
     {
         return $this->values[$key] ?? null;
@@ -159,5 +171,10 @@ class Model
     public function __set($key, $value)
     {
         $this->values[$key] = $value;
+    }
+
+    public function __isset($key)
+    {
+        return isset($this->values[$key]);
     }
 }

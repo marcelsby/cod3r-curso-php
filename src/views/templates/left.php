@@ -3,26 +3,34 @@
         <ul class="nav-list">
             <li class="nav-item">
                 <a href="day_records.php">
-                    <i class="icofont-ui-check mr-2"></i>
-                    Registrar Ponto
+                    <div>
+                        <i class="icofont-ui-check mr-2"></i>
+                        Registrar Ponto
+                    </div>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="monthly_report.php">
-                    <i class="icofont-ui-calendar mr-2"></i>
-                    Relatório Mensal
-            </a>
-            </li>
-            <li class="nav-item">
-                <a href="manager_report.php">
-                    <i class="icofont-chart-histogram mr-2"></i>
-                    Relatório Gerencial
+                    <div>
+                        <i class="icofont-ui-calendar mr-2"></i>
+                        Relatório Mensal
+                    </div>
                 </a>
             </li>
             <li class="nav-item">
-                <a href=".php">
-                    <i class="icofont-users mr-2"></i>
-                    Usuários
+                <a href="manager_report.php">
+                    <div>
+                        <i class="icofont-chart-histogram mr-2"></i>
+                        Relatório Gerencial
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="users.php">
+                    <div>
+                        <i class="icofont-users mr-2"></i>
+                        Usuários
+                    </div>
                 </a>
             </li>
         </ul>

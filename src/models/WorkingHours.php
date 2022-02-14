@@ -192,6 +192,12 @@ class WorkingHours extends Model
         return $result->fetch_assoc()['sum'];
     }
 
+    public static function deleteAllUserRecords($userId)
+    {
+        $sql = "DELETE FROM working_hours WHERE user_id = {$userId}";
+        Database::executeSQL($sql);
+    }
+
     public static function getMonthlyReport($userId, $date)
     {
         $registries = [];
