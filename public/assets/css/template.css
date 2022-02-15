@@ -260,3 +260,20 @@ footer.footer {
 .summary-box .value {
     font-size: 2rem;
 }
+
+.access-denied {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.access-denied p {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.access-denied i.icofont-ban {
+    font-size: 10rem;
+    color: #ff3448;
+}

@@ -17,22 +17,24 @@
                     </div>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="manager_report.php">
-                    <div>
-                        <i class="icofont-chart-histogram mr-2"></i>
-                        Relatório Gerencial
-                    </div>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="users.php">
-                    <div>
-                        <i class="icofont-users mr-2"></i>
-                        Usuários
-                    </div>
-                </a>
-            </li>
+            <?php if ($user->is_admin) : ?>
+                <li class="nav-item">
+                    <a href="manager_report.php">
+                        <div>
+                            <i class="icofont-chart-histogram mr-2"></i>
+                            Relatório Gerencial
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="users.php">
+                        <div>
+                            <i class="icofont-users mr-2"></i>
+                            Usuários
+                        </div>
+                    </a>
+                </li>
+            <?php endif ?>
         </ul>
     </nav>
     <div class="sidebar-widgets">

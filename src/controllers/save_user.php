@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-validateSession();
+validateSession(true);
 
 $exception = null;
 $userData = [];
