@@ -6,16 +6,29 @@ class Model
     protected static $columns = [];
     protected $values = [];
 
-    public function __construct($arr)
+    public function __construct($arr, $sanitize = true)
     {
-        $this->loadFromArray($arr);
+        $this->loadFromArray($arr, $sanitize);
     }
 
-    public function loadFromArray($arr)
+    public function loadFromArray($arr, $sanitize = true)
     {
         if (!empty($arr)) {
             foreach ($arr as $key => $value) {
-                $this->$key = $value;
+                // $conn = Database::getConnection();
+
+                if ($sanitize && isset($value)) {
+                    $cleanValue = $value;
+                    $cleanValue = strip_tags(trim($cleanValue));
+                    $cleanValue = htmlentities($cleanValue, ENT_NOQUOTES);
+                    // $cleanValue = mysqli_real_escape_string($conn, $cleanValue);
+
+                    $this->$key = $cleanValue;
+                } else {
+                    $this->$key = $value;
+                }
+
+                // $conn->close();
             }
         }
     }
