@@ -105,61 +105,52 @@ function getTimeStringFromSeconds($seconds)
     return sprintf('%02d:%02d:%02d', $h, $m, $s);
 }
 
-// TODO: refatorar estas (monstruosidades) funções de formatação de data
-function formatShortDateWithLocale(string | DateTime $date)
+enum DateFormat : string
+{
+    case Short = 'dd/MM/y';
+    case Long = "dd 'de' MMMM 'de' y";
+    case Full = "EEEE',' d 'de' MMMM 'de' y";
+    case MonthAndYear = "MMMM 'de' yyyy";
+    case CustomPattern = '';
+}
+
+/**
+ * Formats the passed date to the pt_BR locale, as defined in config.php, and returns it as a string.
+ *
+ * @param DateFormat $format
+ * A DateFormat enum that specifies the format that the date will be outputed, it can assume these following values:
+ * DateFormat::Short -> 'dd/MM/y' (e.g. '15/02/2022'),
+ * DateFormat::Long -> "dd 'de' MMMM 'de' y" (e.g. '15 de fevereiro de 2022'),
+ * DateFormat::Full -> "EEEE',' d 'de' MMMM 'de' y" (e.g. 'Terça-feira, 15 de fevereiro de 2022'),
+ * DateFormat::MonthAndYear -> "MMMM 'de' yyyy" (e.g. 'Fevereiro de 2022'),
+ * DateFormat::CustomPattern -> Use this if you want format to a custom pattern,
+ * if using this you will need set the $pattern parameter, otherwise the function will return FALSE.
+ *
+ * @param DateTime|string $date
+ * The date that will be formatted, inside the function this parameter
+ * will be transformed into a DateTime object, if it isn't yet.
+ *
+ * @param null|string $pattern
+ * The pattern that will be used to format the given $date. To know more how to pass valid patterns, access
+ * the @link in this PHPDoc. If it's invalid the function will return false.
+ *
+ * @return string|false
+ * Returns the formatted string or false in case of formatting failure.
+ *
+ * @link https://unicode-org.github.io/icu/userguide/format_parse/datetime/#date-field-symbol-table
+ */
+function formatDate($format, $date = new DateTime(), $pattern = null)
 {
     $fmt = new IntlDateFormatter(
         'pt_BR',
         IntlDateFormatter::FULL,
-        IntlDateFormatter::NONE,
-        null,
-        null,
-        'dd/MM/yyyy'
-    );
-
-    $date = getDateAsDateTime($date);
-
-    return $fmt->format($date);
-}
-
-function formatDateWithMonthSpelled(string | DateTime $date)
-{
-    $fmt = new IntlDateFormatter(
-        'pt_BR',
-        IntlDateFormatter::LONG,
-        IntlDateFormatter::NONE,
-    );
-
-    $date = getDateAsDateTime($date);
-
-    return $fmt->format($date);
-}
-
-function formatDateWithDayAndMonthSpelled(string | DateTime $date)
-{
-    $fmt = new IntlDateFormatter(
-        'pt_BR',
         IntlDateFormatter::FULL,
-        IntlDateFormatter::NONE,
+        null,
+        null,
     );
 
     $date = getDateAsDateTime($date);
+    $pattern = $format === DateFormat::CustomPattern ? $pattern : $format->value;
 
-    return ucfirst($fmt->format($date));
-}
-
-function formatDateWithYearAndMonth(string | DateTime $date)
-{
-    $fmt = new IntlDateFormatter(
-        'pt_BR',
-        IntlDateFormatter::FULL,
-        IntlDateFormatter::NONE,
-        null,
-        null,
-        "MMMM 'de' yyyy"
-    );
-
-    $date = getDateAsDateTime($date);
-
-    return ucfirst($fmt->format($date));
+    return $fmt->setPattern($pattern) ? ucfirst($fmt->format($date)) : false;
 }

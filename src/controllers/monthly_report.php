@@ -21,7 +21,7 @@ for ($yearDiff = 0; $yearDiff <= 2; $yearDiff++) {
 
     for ($month = 12; $month >= 1; $month--) {
         $date = new DateTime("{$year}-{$month}-1");
-        $periods[$date->format('Y-m')] = formatDateWithYearAndMonth($date);
+        $periods[$date->format('Y-m')] = formatDate(DateFormat::MonthAndYear, $date);
     }
 }
 

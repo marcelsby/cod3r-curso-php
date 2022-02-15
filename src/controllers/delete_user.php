@@ -30,8 +30,8 @@ if (!isset($_GET['id']) || User::getOne(['id' => $_GET['id']]) === null) {
 
     $userData = $user->getValues();
     $userData['haveWorkingHoursRecords'] = $user->haveWorkingHoursRecords();
-    $userData['start_date'] = formatShortDateWithLocale($userData['start_date']);
-    $userData['end_date'] = $userData['end_date'] ? formatShortDateWithLocale($userData['end_date']) : 'Não informada';
+    $userData['start_date'] = formatDate(DateFormat::Short, $userData['start_date']);
+    $userData['end_date'] = $userData['end_date'] ? formatDate(DateFormat::Short, $userData['end_date']) : 'Não informada';
 
     addMessage(
         MessageType::Warning,

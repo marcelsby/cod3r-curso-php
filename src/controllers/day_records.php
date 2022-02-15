@@ -3,7 +3,6 @@
 session_start();
 validateSession();
 
-$date = new DateTime();
-$today = formatDateWithMonthSpelled($date);
+$today = formatDate(DateFormat::Long);
 
 loadTemplatedView('day_records', ['today' => $today]);

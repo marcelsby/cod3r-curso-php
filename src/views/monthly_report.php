@@ -42,7 +42,7 @@
             <tbody>
                 <?php foreach ($report as $registry) : ?>
                     <tr>
-                        <td><?php echo formatDateWithDayAndMonthSpelled($registry->work_date) ?></td>
+                        <td><?php echo formatDate(DateFormat::Full, $registry->work_date) ?></td>
                         <td><?php echo $registry->time1 ?></td>
                         <td><?php echo $registry->time2 ?></td>
                         <td><?php echo $registry->time3 ?></td>

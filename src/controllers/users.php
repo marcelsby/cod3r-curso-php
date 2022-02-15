@@ -6,10 +6,10 @@ validateSession(true);
 $users = User::get();
 
 foreach ($users as $user) {
-    $user->start_date = formatShortDateWithLocale($user->start_date);
+    $user->start_date = formatDate(DateFormat::Short, $user->start_date);
 
     if ($user->end_date) {
-        $user->end_date = formatShortDateWithLocale($user->end_date) ?? '-';
+        $user->end_date = formatDate(DateFormat::Short, $user->end_date) ?? '-';
     }
 }
 
