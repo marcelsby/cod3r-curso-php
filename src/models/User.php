@@ -79,11 +79,12 @@ class User extends Model
             $errors['password_confirmation'] = 'A confirmação da senha é obrigatória.';
         }
 
-        if (!isEmptyString($this->password) && !isEmptyString($this->password_confirmation)) {
-            if ($this->password != $this->password_confirmation) {
-                $errors['password_confirmation'] = 'As senhas não batem.';
-                $errors['password'] = 'As senhas não batem.';
-            }
+        if (
+            !isEmptyString($this->password) && !isEmptyString($this->password_confirmation)
+            && $this->password != $this->password_confirmation
+        ) {
+            $errors['password_confirmation'] = 'As senhas não batem.';
+            $errors['password'] = 'As senhas não batem.';
         }
 
         if (!empty($errors)) {

@@ -15,20 +15,15 @@ class Model
     {
         if (!empty($arr)) {
             foreach ($arr as $key => $value) {
-                // $conn = Database::getConnection();
-
                 if ($sanitize && isset($value)) {
                     $cleanValue = $value;
                     $cleanValue = strip_tags(trim($cleanValue));
                     $cleanValue = htmlentities($cleanValue, ENT_NOQUOTES);
-                    // $cleanValue = mysqli_real_escape_string($conn, $cleanValue);
 
                     $this->$key = $cleanValue;
                 } else {
                     $this->$key = $value;
                 }
-
-                // $conn->close();
             }
         }
     }

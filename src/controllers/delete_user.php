@@ -35,7 +35,8 @@ if (!isset($_GET['id']) || User::getOne(['id' => $_GET['id']]) === null) {
 
     addMessage(
         MessageType::Warning,
-        'Caso haja registros de horas trabalhadas, esses registros também serão apagados, seja cuidadoso ao deletar um usuário.'
+        'Caso haja registros de horas trabalhadas, esses registros também serão apagados, 
+        seja cuidadoso ao deletar um usuário.'
     );
 }
 
